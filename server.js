@@ -31,9 +31,11 @@ app.get('/todos', function(req, res) {
         };
     }
 
-    db.todo.findAll({where: where}).then(function(todos){
+    db.todo.findAll({
+        where: where
+    }).then(function(todos) {
         res.json(todos);
-    }, function(e){
+    }, function(e) {
         res.status(500).send();
     });
 });
@@ -42,13 +44,13 @@ app.get('/todos', function(req, res) {
 app.get('/todos/:id', function(req, res) {
     var todoId = parseInt(req.params.id, 10);
 
-    db.todo.findById(todoId).then(function(todo){
-        if(!!todo){
+    db.todo.findById(todoId).then(function(todo) {
+        if (!!todo) {
             res.json(todo.toJSON());
-        }else{
+        } else {
             res.status(404).send();
         }
-    },function(e){
+    }, function(e) {
         res.status(500).send();
     });
 });
@@ -56,10 +58,10 @@ app.get('/todos/:id', function(req, res) {
 //POST /todos
 app.post('/todos', function(req, res) {
     var body = _.pick(req.body, 'description', 'completed');
-    
-    db.todo.create(body).then(function(todo){
+
+    db.todo.create(body).then(function(todo) {
         res.json(todo.toJSON());
-    }, function(e){
+    }, function(e) {
         res.status(400).json(e);
     });
 });
@@ -72,15 +74,15 @@ app.delete('/todos/:id', function(req, res) {
         where: {
             id: todoId
         }
-    }).then(function(rowDeleted){
-        if(rowDeleted === 0){
+    }).then(function(rowDeleted) {
+        if (rowDeleted === 0) {
             res.status(404).json({
                 error: 'No todo with id'
             });
-        }else{
+        } else {
             res.status(204).send();
         }
-    }, function(){
+    }, function() {
         res.status(500).send();
     })
 });
@@ -91,25 +93,24 @@ app.put('/todos/:id', function(req, res) {
     var body = _.pick(req.body, 'description', 'completed');
     var attributes = {};
 
-    if(body.hasOwnProperty('completed')){
+    if (body.hasOwnProperty('completed')) {
         attributes.completed = body.completed;
     }
 
-    if(body.hasOwnProperty('description')){
+    if (body.hasOwnProperty('description')) {
         attributes.description = body.description;
     }
 
-    db.todo.findById(todoId).then(function(todo){
-        if(todo){
-            return todo.update(attributes);
+    db.todo.findById(todoId).then(function(todo) {
+        if (todo) {
+            todo.update(attributes).then(function(todo) {
+                res.json(todo.toJSON());
+            }, function(e) {
+                res.status(400).json(e);
+            });
+        } else {
+            res.statys(404).send();
         }
-        else{
-            return res.statys(404).send();
-        }
-    }).then(function(todo){
-        res.json(todo.toJSON());
-    },function(e){
-        res.status(400).json(e);
     });
     // var matchedTodo = _.findWhere(todos, {
     //     id: todoId
@@ -137,7 +138,18 @@ app.put('/todos/:id', function(req, res) {
     // res.json(matchedTodo);
 });
 
-db.sequelize.sync().then(function(){
+// POST /users
+app.post('/users', function(req, res){
+    var body = _.pick(req.body, 'email', 'password');
+
+    db.user.create(body).then(function(user){
+        res.json(user.toPublicJSON());
+    },function(e){
+        res.status(400).json(e);
+    });
+})
+
+db.sequelize.sync().then(function() {
     app.listen(PORT, function() {
         console.log('express listening to port' + PORT);
     });
