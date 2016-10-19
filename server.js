@@ -147,7 +147,19 @@ app.post('/users', function(req, res){
     },function(e){
         res.status(400).json(e);
     });
-})
+});
+
+// POST /users/login
+app.post('/users/login', function(req, res){
+    var body = _.pick(req.body, 'email', 'password');
+
+    if(typeof body.email !== 'string' || typeof body.password !== 'string'){
+        return res.status(400).send()
+    }
+
+    res.json(body);
+
+});
 
 db.sequelize.sync().then(function() {
     app.listen(PORT, function() {
