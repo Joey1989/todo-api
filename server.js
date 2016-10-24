@@ -80,7 +80,7 @@ app.delete('/todos/:id', middleware.requireAuthentication, function(req, res) {
     db.todo.destroy({
         where: {
             id: todoId,
-            userid: req.user.get('id')
+            userId: req.user.get('id')
         }
     }).then(function(rowDeleted) {
         if (rowDeleted === 0) {
