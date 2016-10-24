@@ -47,12 +47,7 @@ app.get('/todos', middleware.requireAuthentication, function(req, res) {
 //GET /todos/:id
 app.get('/todos/:id', middleware.requireAuthentication, function(req, res) {
     var todoId = parseInt(req.params.id, 10);
-    db.todo.findOne({
-        where: {
-            id: todoId,
-            userid: req.user.id
-        }
-    }).then(function(todo) {
+    db.todo.findById(todoId).then(function(todo) {
         if (!!todo) {
             res.json(todo.toJSON());
         } else {
