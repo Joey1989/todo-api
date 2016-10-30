@@ -1,0 +1,32 @@
+{
+  "name": "task-manager",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "^1.3.0",
+    "bootstrap": "^3.2.0",
+    "angular-resource": "^1.3.0",
+    "angular-drag-and-drop-lists": "~1.4.0",
+    "angular-bootstrap": "~1.3.2",
+    "pie-chart": "n3-charts.pie-chart#1.0.0",
+    "d3": "~3.5.17",
+    "angular-ui-tab-scroll": "https://github.com/VersifitTechnologies/angular-ui-tab-scroll.git#~2.2.3"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.3.0"
+  },
+  "appPath": "app",
+  "moduleName": "taskManagerApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  },
+  "resolutions": {
+    "angular": ">=1.4.0",
+    "d3": "~3.5.17"
+  }
+}
