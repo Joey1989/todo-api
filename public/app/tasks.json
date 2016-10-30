@@ -1,0 +1,254 @@
+[
+    {
+      "id":"0",
+      "name":"web design",
+      "type":"taskManager",
+      "tasks":[
+        {
+        	"id":"0",
+        	"status":"toDo",
+        	"label":"download a browser",
+        	"content":"download a popular browser, like Chrome,Firefox or Safari.",
+            "progress":"0"
+        },
+        {
+        	"id":"1",
+        	"status":"toDo",
+        	"label":"download a text editer",
+        	"content":"download a popular text editer, like Sublime.",
+            "progress":"0"
+        },
+        {
+        	"id":"2",
+        	"status":"doing",
+        	"label":"download bower",
+        	"content":"download bower.",
+            "progress":"0.89"
+        },
+        {
+        	"id":"3",
+        	"status":"doing",
+        	"label":"download Angularjs",
+        	"content":"download Angularjs.",
+            "progress":"0.47"
+        },
+        {
+        	"id":"4",
+        	"status":"done",
+        	"label":"download Bootstrap",
+        	"content":"download Bootstrap.",
+            "progress":"1"
+        },
+        {
+        	"id":"5",
+        	"status":"done",
+        	"label":"include dependencies",
+        	"content":"include dependencies.",
+            "progress":"1"
+        },
+        {
+        	"id":"6",
+        	"status":"toDo",
+        	"label":"configure node server",
+        	"content":"create a http server on port 9000.",
+            "progress":"0"
+        },
+        {
+        	"id":"7",
+        	"status":"done",
+        	"label":"add l10n",
+        	"content":"install angular-reanslate.",
+            "progress":"1"
+        }
+      ]
+    },
+    {
+      "id":"1",
+      "name":"web dev",
+      "type":"taskManager",
+      "tasks":[
+        {
+            "id":"0",
+            "status":"done",
+            "label":"download a browser",
+            "content":"download a popular browser, like Chrome,Firefox or Safari.",
+            "progress":"0"
+        },
+        {
+            "id":"1",
+            "status":"done",
+            "label":"download a text editer",
+            "content":"download a popular text editer, like Sublime.",
+            "progress":"0"
+        },
+        {
+            "id":"2",
+            "status":"done",
+            "label":"download bower",
+            "content":"download bower.",
+            "progress":"0.89"
+        },
+        {
+            "id":"3",
+            "status":"doing",
+            "label":"download Angularjs",
+            "content":"download Angularjs.",
+            "progress":"0.47"
+        },
+        {
+            "id":"4",
+            "status":"done",
+            "label":"download Bootstrap",
+            "content":"download Bootstrap.",
+            "progress":"1"
+        },
+        {
+            "id":"5",
+            "status":"done",
+            "label":"include dependencies",
+            "content":"include dependencies.",
+            "progress":"1"
+        },
+        {
+            "id":"6",
+            "status":"done",
+            "label":"configure node server",
+            "content":"create a http server on port 9000.",
+            "progress":"0"
+        },
+        {
+            "id":"7",
+            "status":"done",
+            "label":"add l10n",
+            "content":"install angular-reanslate.",
+            "progress":"1"
+        }
+      ]
+    },
+    {
+      "id":"2",
+      "name":"personal projects",
+      "type":"taskManager",
+      "tasks":[
+        {
+            "id":"0",
+            "status":"doing",
+            "label":"download a browser",
+            "content":"download a popular browser, like Chrome,Firefox or Safari.",
+            "progress":"0"
+        },
+        {
+            "id":"1",
+            "status":"doing",
+            "label":"download a text editer",
+            "content":"download a popular text editer, like Sublime.",
+            "progress":"0"
+        },
+        {
+            "id":"2",
+            "status":"done",
+            "label":"download bower",
+            "content":"download bower.",
+            "progress":"0.89"
+        },
+        {
+            "id":"3",
+            "status":"doing",
+            "label":"download Angularjs",
+            "content":"download Angularjs.",
+            "progress":"0.47"
+        },
+        {
+            "id":"4",
+            "status":"done",
+            "label":"download Bootstrap",
+            "content":"download Bootstrap.",
+            "progress":"1"
+        },
+        {
+            "id":"5",
+            "status":"done",
+            "label":"include dependencies",
+            "content":"include dependencies.",
+            "progress":"1"
+        },
+        {
+            "id":"6",
+            "status":"done",
+            "label":"configure node server",
+            "content":"create a http server on port 9000.",
+            "progress":"0"
+        },
+        {
+            "id":"7",
+            "status":"done",
+            "label":"add l10n",
+            "content":"install angular-reanslate.",
+            "progress":"1"
+        }
+      ]
+    },
+    {
+      "id":"3",
+      "name":"demo",
+      "type":"taskManager",
+      "tasks":[
+        {
+            "id":"0",
+            "status":"doing",
+            "label":"download a browser",
+            "content":"download a popular browser, like Chrome,Firefox or Safari.",
+            "progress":"0"
+        },
+        {
+            "id":"1",
+            "status":"doing",
+            "label":"download a text editer",
+            "content":"download a popular text editer, like Sublime.",
+            "progress":"0"
+        },
+        {
+            "id":"2",
+            "status":"doing",
+            "label":"download bower",
+            "content":"download bower.",
+            "progress":"0.89"
+        },
+        {
+            "id":"3",
+            "status":"doing",
+            "label":"download Angularjs",
+            "content":"download Angularjs.",
+            "progress":"0.47"
+        },
+        {
+            "id":"4",
+            "status":"done",
+            "label":"download Bootstrap",
+            "content":"download Bootstrap.",
+            "progress":"1"
+        },
+        {
+            "id":"5",
+            "status":"done",
+            "label":"include dependencies",
+            "content":"include dependencies.",
+            "progress":"1"
+        },
+        {
+            "id":"6",
+            "status":"done",
+            "label":"configure node server",
+            "content":"create a http server on port 9000.",
+            "progress":"0"
+        },
+        {
+            "id":"7",
+            "status":"todo",
+            "label":"add l10n",
+            "content":"install angular-reanslate.",
+            "progress":"1"
+        }
+      ]
+    }
+]

@@ -10,11 +10,13 @@ var PORT = process.env.PORT || 3001;
 var todos = [];
 var todoNextId = 1;
 
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
-app.get('/', function(req, res) {
-    res.send('to do api');
-});
+// app.get('/', function(req, res) {
+//     res.send('to do api');
+// });
+app.use('/', express.static(path.join(__dirname, '/public/app')));
 
 //GET /todos
 app.get('/todos', middleware.requireAuthentication, function(req, res) {

@@ -1,0 +1,92 @@
+<div class="col-xs-12 col-sm-12 col-md-12">
+	<!-- <pre>{{imported['toDo'].length}}</pre> -->
+    <div>
+        <div class="container pie-chart-wrapper">
+            <pie-chart class="pie-chart" data="chartData" options="chartOptions"></pie-chart>
+        </div>
+        <div class="text-center">
+            <h4>Project has been finished by {{100*donePersent}} %.</h4>
+        </div>
+    </div>
+    <!-- <pre>{{models|json}}</pre> -->
+    <div ng-repeat="list in models.lists" class="col-xs-12 col-sm-4 col-md-4 task-column">
+        <div class="panel task-panel" ng-class="{'panel-warning':list.meta_data.type=='toDo','panel-info':list.meta_data.type=='doing','panel-success':list.meta_data.type=='done'}">
+            <div class="panel-heading">
+                {{list.meta_data.type|uppercase}} List
+                <span class="pull-right" ng-if="list.meta_data.type==='toDo'">
+                    <span class="glyphicon glyphicon-plus" ng-click="addTask()"></span>
+                </span>
+            </div>
+            <div clsss="panel-body" style="min-height: 165px">
+                <div ng-if="list.data.length==0" class="text-center">No task in this list...</div>
+                <ul dnd-list="list.data">
+                    <!-- The dnd-draggable directive makes an element draggable and will
+                         transfer the object that was assigned to it. If an element was
+                         dragged away, you have to remove it from the original list
+                         yourself using the dnd-moved attribute -->
+                    <li ng-repeat="item in list.data"
+                        dnd-draggable="item"
+                        dnd-moved="list.data.splice($index, 1)"
+                        dnd-effect-allowed="move"
+                        dnd-selected="models.selected = item"
+                        ng-class="{'selected': models.selected === item}"
+                        >
+                        {{item.label}}
+                        <button class="btn btn-sm btn-default btn-option pull-right" ng-click="" uib-popover-template="'buttonTemplate.html'" popover-title="Options" popover-placement="top" popover-trigger="outsideClick">
+                            <span class="glyphicon glyphicon-wrench"></span>
+                        </button>
+                        <div ng-if="list.meta_data.type=='doing'">
+                            <uib-progressbar class="progress-striped active task-progress-bar" max="1" value="item.progress" type="info"><i>{{item.progress*100}}%</i></uib-progressbar>
+                        </div>
+                        <script type="text/ng-template" id="buttonTemplate.html">
+                            <div class="btn-group" style="min-width:80px">
+                                <button type="button" class="btn btn-sm btn-danger" ng-click="removeTask(models.id,list.meta_data.type,item)">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-primary" ng-click="open('sm')">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                            </div>
+                        </script>
+                        <script type="text/ng-template" id="myModalContent.html">
+                            <div class="modal-header">
+                                <h3 class="modal-title">I am a modal!</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="label">Label:</label>
+                                        <input type="text" ng-model="editedTask.label" class="form-control" id="label">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="content">Content:</label>
+                                        <textarea type="text" ng-model="editedTask.content" class="form-control" id="content"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" ng-model="editedTask.progress" class="form-control" id="progress">
+                                        <uib-progressbar class="progress-striped active task-progress-bar" max="1" value="editedTask.progress" type="info"><i>{{editedTask.progress*100}}%</i></uib-progressbar>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="button" ng-click="updateTask(tasksService.selectedTask.status,tasksService.selectedTask,editedTask)">Submit</button>
+                                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                            </div>
+                        </script>
+                            <!-- <button class="btn btn-sm btn-danger pull-right" ng-click="removeTask(list.meta_data.type,item)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                            <button class="btn btn-sm btn-primary pull-right" ng-click="editTask(list.meta_data.type,item)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button> -->
+
+                    </li>
+                </ul>
+            </div>
+            <div class="panel-footer text-center">
+                <button class="btn" ng-click="moveToBefore(models.id, list.meta_data.type)" ng-class="{'btn-warning':list.meta_data.type=='toDo','btn-info':list.meta_data.type=='doing','btn-success':list.meta_data.type=='done'}" ng-disabled="list.meta_data.type!==models.selected.status" ng-if="list.meta_data.type!=='toDo'"><span class="glyphicon glyphicon-arrow-left" ></span></button>
+                <button class="btn" ng-click="moveToNext(models.id, list.meta_data.type)" ng-class="{'btn-warning':list.meta_data.type=='toDo','btn-info':list.meta_data.type=='doing'}" ng-disabled="list.meta_data.type!==models.selected.status" ng-if="list.meta_data.type!=='done'"><span class="glyphicon glyphicon-arrow-right"></span></button>
+            </div>
+        </div>
+    </div>
+</div>

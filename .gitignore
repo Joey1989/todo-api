@@ -1,2 +1,4 @@
 node_modules/
 data/*.sqlite
+public/bower_components/
+public/node_modules/
