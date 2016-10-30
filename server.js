@@ -12,6 +12,7 @@ var todos = [];
 var todoNextId = 1;
 
 app.use(express.static(__dirname + '/public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 app.use(bodyParser.json());
 
 // app.get('/', function(req, res) {
