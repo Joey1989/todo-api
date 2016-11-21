@@ -21,17 +21,16 @@ angular
   ])
   .service('appConfig', ['$location', function($location) {
     var staging  = '';
-    var port     = 3000;
+    var port     = 'localhost:3001/';
     var protocol = 'http';
-    if($location.absUrl().indexOf('staging.xxx.com') > -1){
-      staging = 'staging.';
-          port    = 80;
-      }
-      if($location.protocol()==='https'){
-          protocol = 'https';
-      }
+
+    if($location.protocol()==='https'){
+        protocol = 'https';
+        staging = 'joey-todo-api.herokuapp.com/';
+        port = '';
+    }
     return {
-        'apiBaseURL': protocol+'://'+staging+'localhost:3001/',
+        'apiBaseURL': protocol+'://'+staging+port,
         'serviceUrls': {
               'register' : 'users',
               'authenticate' : 'users/login',
