@@ -1,0 +1,90 @@
+<div>
+<!--     <form name="newTaskForm">
+        <div class="form-group">
+            <label for="newTask">Task name:</label>
+            <input type="text" class="form-control" data-ng-model="task.description">
+            <div>{{task|json}}</div>
+	        <button class="btn btn-default" data-ng-click="doCreateTask()">Add Task</button>
+        </div>
+        <div class="form-group">
+            <label for="updateTask">Task id:</label>
+            <input type="text" class="form-control" data-ng-model="taskId">
+	        <button class="btn btn-warning" data-ng-click="doUpdateTask(taskId)">Update Task</button>
+	        <button class="btn btn-danger" data-ng-click="doDeleteTask(taskId)">Delete Task</button>
+        </div>
+    </form>
+    <button class="btn btn-success" data-ng-click="doLoadTasks()">Load Tasks</button>
+    <pre>{{tasksService.userTasks|json}}</pre>
+    <pre>{{tasksService.selectedTask|json}}</pre> -->
+    
+    <form name="newTaskForm">
+        <div class="form-group">
+            <label for="newTask">Task name:</label>
+            <div class="input-group">
+                <input type="text" class="form-control" data-ng-model="task.description" placeholder="Enter a task here...">
+                <span class="btn btn-success input-group-addon" data-ng-click="doCreateTask()">Add Task</span>
+            </div>
+            <!-- <div>{{task|json}}</div> -->
+            <!-- <button class="btn btn-success" data-ng-click="doCreateTask()">Add Task</button> -->
+        </div>
+    </form>
+    <div class="panel task-panel panel-info">
+        <div class="panel-heading">
+            <span>
+                <span>The todo list</span>
+                <span class="glyphicon glyphicon-plus pull-right" ng-click="addBlankTask()"></span>
+            </span>
+        </div>
+        <div clsss="panel-body" style="min-height: 165px">
+            <div ng-if="tasksService.userTasks.length==0" class="text-center">The to do list is empty, please add some tasks...</div>
+            <ul dnd-list data-ng-repeat="task in tasksService.userTasks">
+                <li>
+                    <span>
+                        {{task.description}}
+                        <span data-ng-if="task.completed||task.completed==='true'">(Completed)</span>
+                    </span>
+                    <button class="btn btn-sm btn-default btn-option pull-right" ng-click="selectATask(task)" uib-popover-template="'buttonTemplate.html'" popover-title="Options" popover-placement="top" popover-trigger="outsideClick">
+                        <span class="glyphicon glyphicon-wrench"></span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <script type="text/ng-template" id="buttonTemplate.html">
+            <div class="btn-group" style="min-width:80px">
+                <button type="button" class="btn btn-sm btn-danger" ng-click="doDeleteTask(tasksService.selectedTask.id)">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+                <button type="button" class="btn btn-sm btn-primary" ng-click="open('sm')">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+            </div>
+        </script>
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit the task</h3>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="description">Task description:</label>
+                        <input type="text" ng-model="editedTask.description" class="form-control" id="description">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" ng-model="editedTask.completed" ng-value="true">
+                            Completed
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="editedTask.completed" ng-value="false">
+                            Incompleted
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" data-ng-click="doUpdateTask(editedTask.id)">Update</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+    </div>
+</div>

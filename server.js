@@ -13,6 +13,7 @@ var todoNextId = 1;
 
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // app.get('/', function(req, res) {
@@ -177,7 +178,7 @@ app.delete('/users/login', middleware.requireAuthentication, function(req, res){
     });
 });
 
-db.sequelize.sync({force: true}).then(function() {
+db.sequelize.sync({force: false}).then(function() {
     app.listen(PORT, function() {
         console.log('express listening to port' + PORT);
     });

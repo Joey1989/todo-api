@@ -14,10 +14,113 @@ angular
     'dndLists',
     'ui.bootstrap',
     'n3-pie-chart' ,
-    'ui.tab.scroll'
+    'ui.tab.scroll',
+    'ui.router',
+    'LocalStorageModule',
+    'underscore'
   ])
+  .service('appConfig', ['$location', function($location) {
+    var staging  = '';
+    var port     = 3000;
+    var protocol = 'http';
+    if($location.absUrl().indexOf('staging.xxx.com') > -1){
+      staging = 'staging.';
+          port    = 80;
+      }
+      if($location.protocol()==='https'){
+          protocol = 'https';
+      }
+    return {
+        'apiBaseURL': protocol+'://'+staging+'localhost:3001/',
+        'serviceUrls': {
+              'register' : 'users',
+              'authenticate' : 'users/login',
+              'accessToken' : 'access_token',
+              'reqestEmail' : 'password/email',
+              'resetPassword': 'password/reset',
+              'userTask': 'todos/:id'
+        }
+    }
+  }])
   .config(function(scrollableTabsetConfigProvider){
-  scrollableTabsetConfigProvider.setShowTooltips (true);
-  scrollableTabsetConfigProvider.setTooltipLeftPlacement('bottom');
-  scrollableTabsetConfigProvider.setTooltipRightPlacement('left');
-});
+    scrollableTabsetConfigProvider.setShowTooltips (true);
+    scrollableTabsetConfigProvider.setTooltipLeftPlacement('bottom');
+    scrollableTabsetConfigProvider.setTooltipRightPlacement('left');
+  })
+  .config(['$stateProvider', '$sceProvider', '$httpProvider','localStorageServiceProvider',
+    function($stateProvider, $sceProvider, $httpProvider, localStorageServiceProvider) {
+
+    localStorageServiceProvider
+      .setPrefix('taskManagerApp')
+      .setStorageType('localStorage');
+
+    $httpProvider.interceptors.push('httpInterceptor');
+  }])
+  .constant('AUTH_EVENTS', {
+      'loginSuccess': 'auth-login-success',
+      'loginFailed': 'auth-login-failed',
+      'logoutSuccess': 'auth-logout-success',
+      'authTimeout': 'auth-timeout',
+      'authenticated' : 'auth-authenticated',
+      'notAuthenticated': 'auth-not-authenticated',
+      'notAuthorized': 'auth-not-authorized'
+  })
+  .config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $stateProvider.state('root',{
+      url: '/',
+      views: {
+        'main': {
+          template: '<div></div>',
+          controller: ['authService','$state',
+            function(authService,$state){
+              $state.go('home');
+          }]
+        }
+      }
+    }).state('home',{
+      url: '/home',
+      views:{
+        'main':{
+          templateUrl: 'views/home.html',
+          controller: 'HomeCtrl'
+        }
+      }
+    })
+    .state('signin', {
+        url:'/signin',
+        views:{
+            'main': {
+                templateUrl: 'views/auth/signin.html',
+                controller: 'SigninCtrl'
+            }
+        }
+    })
+    .state('signup', {
+        url:'/signup',
+        views:{
+            'main': {
+                templateUrl: 'views/auth/signup.html',
+                controller: 'SigninCtrl'
+            }
+        }
+    })
+    .state('myTasks', {
+      url: '/myTasks',
+      views:{
+        'main':{
+          templateUrl: 'views/tasks/myTasks.html',
+          controller: 'MyTaskCtrl'
+        }
+      }
+    })
+    .state('test',{
+      url: '/test',
+      views:{
+        'main':{
+          templateUrl: 'views/test.html',
+          controller: 'testCtrl'
+        }
+      }
+    });
+  });

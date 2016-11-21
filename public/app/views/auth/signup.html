@@ -1,0 +1,17 @@
+<div>
+	<h2>Sign up</h2>
+    <form name="signinForm">
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" data-ng-model="signup.email">
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" data-ng-model="signup.password">
+        </div>
+        <button type="submit" class="btn btn-default" data-ng-click="doSignUp(signup)">Sign up</button>
+    </form>
+    <div data-ng-if="warningInfo.length>0">
+        {{warningInfo}}
+    </div>
+</div>

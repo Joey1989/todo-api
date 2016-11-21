@@ -31,6 +31,9 @@ module.exports = function(config) {
       'bower_components/d3/d3.js',
       'bower_components/pie-chart/dist/pie-chart.min.js',
       'bower_components/angular-ui-tab-scroll/angular-ui-tab-scroll.js',
+      'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-local-storage/dist/angular-local-storage.js',
+      'bower_components/underscore/underscore.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",
